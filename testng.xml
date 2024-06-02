@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="BaseSuite">
+<listeners>
+	<listener class-name="com.rahulshettyacademy.framework.reporting.HtmlReporting"/>
+</listeners>
+  <test thread-count="5" name="BasicTest">
+    <classes>
+      <class name="codeCheck.BaseClassCode"/>
+    </classes>
+  </test> <!-- Testone -->
+</suite> <!-- BaseSuite -->
