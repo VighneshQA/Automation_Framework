@@ -1,11 +1,9 @@
 package codeCheck;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.rahulshettyacademy.framework.BasePage.Base;
+import com.rahulshettyacademy.framework.pages.Base;
 
 public class BaseClassCode extends Base {
 

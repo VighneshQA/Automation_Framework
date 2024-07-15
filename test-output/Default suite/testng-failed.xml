@@ -3,16 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="codeCheck.BaseClassCode">
+      <class name="codeCheck.LoginTestCases">
         <methods>
-          <include name="invokeURL"/>
-          <include name="browserClose"/>
-          <include name="testTwo"/>
-          <include name="browserQuit"/>
-          <include name="invokeBroswser"/>
-          <include name="loadProperties"/>
+          <include name="basicMethod"/>
+          <include name="testCase1"/>
         </methods>
-      </class> <!-- codeCheck.BaseClassCode -->
+      </class> <!-- codeCheck.LoginTestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

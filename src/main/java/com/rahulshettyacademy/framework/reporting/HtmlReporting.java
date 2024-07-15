@@ -9,12 +9,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.rahulshettyacademy.framework.BasePage.Base;
+import com.rahulshettyacademy.framework.pages.Base;
 
 public class HtmlReporting extends Base implements ITestListener {
 
 	static ExtentReports extent;
 	static ExtentTest Test;
+	String methodName;
 
 	public HtmlReporting() {
 		String path = System.getProperty("user.dir") + "//reports//myReport.html";
@@ -36,8 +37,9 @@ public class HtmlReporting extends Base implements ITestListener {
 	public void onTestStart(ITestResult result) {
 
 		ITestListener.super.onTestStart(result);
-		Test = extent.createTest(result.getMethod().getMethodName());
-		System.out.println("Test Started successfully for " + result.getMethod().getMethodName());
+		methodName = result.getMethod().getMethodName();
+		Test = extent.createTest(methodName);
+		System.out.println("Test Started successfully for " + methodName);
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class HtmlReporting extends Base implements ITestListener {
 
 		ITestListener.super.onTestSuccess(result);
 		Test.log(Status.PASS, "Test Passed");
-		System.out.println("Test passed for " + result.getMethod().getMethodName());
+		System.out.println("Test passed for " + methodName);
 
 	}
 
@@ -65,9 +67,9 @@ public class HtmlReporting extends Base implements ITestListener {
 		// Get the error message
 		Test.fail(result.getThrowable());
 		try {
-			ss = screenShot(result.getMethod().getMethodName(), driver);
+			ss = screenShot(methodName, driver);
 
-			Test.addScreenCaptureFromPath(ss, result.getMethod().getMethodName());
+			Test.addScreenCaptureFromPath(ss, methodName);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}

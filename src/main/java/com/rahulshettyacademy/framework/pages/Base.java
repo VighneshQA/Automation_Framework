@@ -1,4 +1,4 @@
-package com.rahulshettyacademy.framework.BasePage;
+package com.rahulshettyacademy.framework.pages;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +14,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -23,8 +27,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Base {
 
-	public WebDriver driver;
-	Properties prop;
+	protected WebDriver driver;
+	public Properties prop;
+	public WebElement element = null;
 
 	/*************** Load Properties File **********************/
 
@@ -49,22 +54,33 @@ public class Base {
 
 		try {
 
-			String browser = prop.getProperty(browserName);
+			String browser = System.getProperty("browser") != null ? System.getProperty("browser")
+					: prop.getProperty(browserName);
 			if (browser.equalsIgnoreCase("Chrome")) {
 				WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
+				ChromeOptions options = new ChromeOptions();
+				if (browser.contains("headless")) {
+					options.addArguments("headless");
+				}
+				driver = new ChromeDriver(options);
+
 			} else if (browser.equalsIgnoreCase("Firefox")) {
 				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
 			} else if (browser.equalsIgnoreCase("Microsoft Edge")) {
 				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
+			} else {
+
+				System.out.println("Invalid browser name :" + browser);
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
-	/******************* Invoke URL *********************/
+	/******************* Invoke URL from Property file *********************/
 
 	public void invokeURL(String URL) {
 		try {
@@ -77,41 +93,71 @@ public class Base {
 
 	/***************** Identify Locator ******************/
 
-	public WebElement getWebElement(String locatorKey) {
-		WebElement element = null;
+	public enum LocatorType {
+		id, name, css, xpath, linktext,
+	}
+
+	public WebElement getWebElement(String locatorKey, LocatorType type) {
 
 		try {
-			if (locatorKey.endsWith("_id")) {
-				element = driver.findElement(By.id(prop.getProperty(locatorKey)));
+			switch (type) {
+			case id:
+				element = driver.findElement(By.id(locatorKey));
+				break;
+			case name:
+				element = driver.findElement(By.name(locatorKey));
+				break;
+			case css:
+				element = driver.findElement(By.cssSelector(locatorKey));
+				break;
+			case xpath:
+				element = driver.findElement(By.xpath(locatorKey));
+				break;
+			case linktext:
+				element = driver.findElement(By.linkText(locatorKey));
+				break;
+			default:
+				throw new IllegalArgumentException("This is an invalid LocatorType or locator not registered in enum");
+
 			}
-			if (locatorKey.endsWith("_name")) {
-				element = driver.findElement(By.name(prop.getProperty(locatorKey)));
-			}
-			if (locatorKey.endsWith("_css")) {
-				element = driver.findElement(By.cssSelector(prop.getProperty(locatorKey)));
-			}
-			if (locatorKey.endsWith("_xpath")) {
-				element = driver.findElement(By.xpath(prop.getProperty(locatorKey)));
-			}
-			if (locatorKey.endsWith("_LinkText")) {
-				element = driver.findElement(By.linkText(prop.getProperty(locatorKey)));
-			}
+
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 		return element;
 	}
 
-	/**************** Timeouts **************/
+	/*
+	 * $$ This code is used when the data is retrieved from property file $$ public
+	 * WebElement getWebElement(String locatorKey) { WebElement element = null;
+	 * 
+	 * try { if (locatorKey.endsWith("_id")) { element =
+	 * driver.findElement(By.id(prop.getProperty(locatorKey))); } if
+	 * (locatorKey.endsWith("_name")) { element =
+	 * driver.findElement(By.name(prop.getProperty(locatorKey))); } if
+	 * (locatorKey.endsWith("_css")) { element =
+	 * driver.findElement(By.cssSelector(prop.getProperty(locatorKey))); } if
+	 * (locatorKey.endsWith("_xpath")) { element =
+	 * driver.findElement(By.xpath(prop.getProperty(locatorKey))); } if
+	 * (locatorKey.endsWith("_LinkText")) { element =
+	 * driver.findElement(By.linkText(prop.getProperty(locatorKey))); } } catch
+	 * (Exception e) { e.getMessage(); } return element; }
+	 * 
+	 */
+
+	/**************** Clear Field **************/
+	public void clear(String locatorKey, LocatorType type) {
+
+		getWebElement(locatorKey, type).clear();
+	}
 
 	/**************** Close Browser **************/
-	
 
 	public void browserClose() {
 		driver.close();
 
 	}
-	
+
 	/**************** Quit Browser **************/
 
 //	@AfterSuite
@@ -121,9 +167,9 @@ public class Base {
 
 	/**************** Enter Text **************/
 
-	public void enterText(String locatorKey, String text) {
+	public void enterText(String locatorKey, LocatorType type, String text) {
 		try {
-			getWebElement(locatorKey).sendKeys(text);
+			getWebElement(locatorKey, type).sendKeys(text);
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -131,9 +177,9 @@ public class Base {
 
 	/**************** Click Element **************/
 
-	public void clickElement(String locatorKey) {
+	public void clickElement(String locatorKey, LocatorType type) {
 		try {
-			getWebElement(locatorKey).click();
+			getWebElement(locatorKey, type).click();
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -141,9 +187,9 @@ public class Base {
 
 	/**************** StaticDropdown by Index **************/
 
-	public void staticDropdownIndex(String locatorKey, int indexValue) {
+	public void staticDropdownIndex(String locatorKey, LocatorType type, int indexValue) {
 		try {
-			getWebElement(locatorKey).click();
+			getWebElement(locatorKey, type).click();
 			WebElement element = driver.findElement(By.xpath(locatorKey));
 			Select dropdown = new Select(element);
 			dropdown.selectByIndex(indexValue);
@@ -154,9 +200,9 @@ public class Base {
 
 	/**************** StaticDropdown by value **************/
 
-	public void staticDropdownValue(String locatorKey, String attValue) {
+	public void staticDropdownValue(String locatorKey, LocatorType type, String attValue) {
 		try {
-			getWebElement(locatorKey).click();
+			getWebElement(locatorKey, type).click();
 			WebElement element = driver.findElement(By.xpath(locatorKey));
 			Select dropdown = new Select(element);
 			dropdown.selectByValue(attValue);
@@ -167,9 +213,9 @@ public class Base {
 
 	/**************** StaticDropdown by visible_text **************/
 
-	public void staticDropdownVisibleText(String locatorKey, String visibleText) {
+	public void staticDropdownVisibleText(String locatorKey, LocatorType type, String visibleText) {
 		try {
-			getWebElement(locatorKey).click();
+			getWebElement(locatorKey, type).click();
 			WebElement element = driver.findElement(By.xpath(locatorKey));
 			Select dropdown = new Select(element);
 			dropdown.selectByVisibleText(visibleText);
@@ -180,9 +226,9 @@ public class Base {
 
 	/**************** DropdownList by Auto suggestive **************/
 
-	public void autoSuggestiveDropdown(String locatorKey, String value, String text) {
+	public void autoSuggestiveDropdown(String locatorKey, LocatorType type, String value, String text) {
 		try {
-			getWebElement(locatorKey).sendKeys(value);
+			getWebElement(locatorKey, type).sendKeys(value);
 			List<WebElement> element = driver.findElements(By.xpath(locatorKey));
 			element.stream().filter(ele -> ele.getText().equalsIgnoreCase(text)).forEach(ele -> ele.click());
 		} catch (Exception e) {
@@ -226,27 +272,28 @@ public class Base {
 
 	public String screenShot(String testCaseName, WebDriver driver) {
 		this.driver = driver;
-		
+
 		TakesScreenshot takeShot = (TakesScreenshot) driver;
 		File srcFile = takeShot.getScreenshotAs(OutputType.FILE);
-		Instant time = Instant.now();
-		File destFile = new File(System.getProperty("user.dir") + "//Screenshots//" + testCaseName + time + ".png");
+		// Instant time = Instant.now();
+		File destFile = new File(System.getProperty("user.dir") + "//Screenshots//" + ".png");
 		try {
 			FileUtils.copyFile(srcFile, destFile);
+			System.out.println(destFile.getAbsolutePath());
+			return destFile.getAbsolutePath();
 		} catch (Exception e) {
-			e.getMessage();
+			return e.getMessage();
 		}
-		System.out.println(destFile.getAbsolutePath());
-		return destFile.getAbsolutePath();
 	}
-	
-	/***************Abstract Methods********************/
-	
+
+	/*************** Abstract Methods ********************/
+
 	@BeforeSuite
 	public void basicMethod() {
-	
+
 		loadProperties();
 		invokeBroswser("browserName");
+		driver.manage().window().maximize();
 		invokeURL("URL");
 
 	}

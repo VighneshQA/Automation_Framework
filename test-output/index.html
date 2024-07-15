@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -40,7 +40,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-BaseSuite" class="navigator-link">
-              <span class="suite-name border-failed">BaseSuite</span>
+              <span class="suite-name border-passed">BaseSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -51,7 +51,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-BaseSuite" class="navigator-link ">
-                    <span>C:\Users\vther\eclipse-workspace\Framework_Practice1\testng.xml</span>
+                    <span>C:\Users\vther\eclipse-workspace\Framework_Practice1\testSuite\testng.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -93,21 +93,36 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">4 methods,   4 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-BaseSuite" class="hide-methods failed suite-BaseSuite"> (hide)</a> <!-- hide-methods failed suite-BaseSuite -->
-                      <a href="#" panel-name="suite-BaseSuite" class="show-methods failed suite-BaseSuite"> (show)</a> <!-- show-methods failed suite-BaseSuite -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-BaseSuite" class="hide-methods passed suite-BaseSuite"> (hide)</a> <!-- hide-methods passed suite-BaseSuite -->
+                      <a href="#" panel-name="suite-BaseSuite" class="show-methods passed suite-BaseSuite"> (show)</a> <!-- show-methods passed suite-BaseSuite -->
                     </span>
-                    <div class="method-list-content failed suite-BaseSuite">
+                    <div class="method-list-content passed suite-BaseSuite">
                       <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-BaseSuite" title="codeCheck.BaseClassCode" class="method navigator-link" hash-for-method="testTwo">testTwo</a> <!-- method navigator-link -->
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-BaseSuite" title="codeCheck.LoginTestCases" class="method navigator-link" hash-for-method="testCase1(vtherider6342@gmail.com, 123456789, Invalid Password)">testCase1(vtherider6342@gmail.com, 123456789, Invalid Password)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-BaseSuite -->
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-BaseSuite" title="codeCheck.LoginTestCases" class="method navigator-link" hash-for-method="testCase1(vtherider63421@gmail.com, 12345678, Invalid username)">testCase1(vtherider63421@gmail.com, 12345678, Invalid username)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-BaseSuite" title="codeCheck.LoginTestCases" class="method navigator-link" hash-for-method="testCase1(vtherider6342@gmail.com, 12345678, Valid)">testCase1(vtherider6342@gmail.com, 12345678, Valid)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-BaseSuite" title="codeCheck.LoginTestCases" class="method navigator-link" hash-for-method="testCase1(vtherider63421@gmail.com, 123456789, Invalid data)">testCase1(vtherider63421@gmail.com, 123456789, Invalid data)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-BaseSuite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -119,30 +134,50 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-BaseSuite" class="panel BaseSuite">
-          <div class="suite-BaseSuite-class-failed">
+          <div class="suite-BaseSuite-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">codeCheck.BaseClassCode</span>
+              <img src="passed.png"/>
+              <span class="class-name">codeCheck.LoginTestCases</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testTwo">
-                  </a> <!-- testTwo -->
-                  <span class="method-name">testTwo</span>
-                  <div class="stack-trace">java.lang.AssertionError: expected [Let&apos;s Show] but found [Let&apos;s Shop]
-	at codeCheck.BaseClassCode.testTwo(BaseClassCode.java:26)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 33 stack frames
-</div> <!-- stack-trace -->
+                  <a name="testCase1(vtherider6342@gmail.com, 123456789, Invalid Password)">
+                  </a> <!-- testCase1(vtherider6342@gmail.com, 123456789, Invalid Password) -->
+                  <span class="method-name">testCase1</span>
+                  <span class="parameters">(vtherider6342@gmail.com, 123456789, Invalid Password)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCase1(vtherider63421@gmail.com, 12345678, Invalid username)">
+                  </a> <!-- testCase1(vtherider63421@gmail.com, 12345678, Invalid username) -->
+                  <span class="method-name">testCase1</span>
+                  <span class="parameters">(vtherider63421@gmail.com, 12345678, Invalid username)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCase1(vtherider6342@gmail.com, 12345678, Valid)">
+                  </a> <!-- testCase1(vtherider6342@gmail.com, 12345678, Valid) -->
+                  <span class="method-name">testCase1</span>
+                  <span class="parameters">(vtherider6342@gmail.com, 12345678, Valid)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCase1(vtherider63421@gmail.com, 123456789, Invalid data)">
+                  </a> <!-- testCase1(vtherider63421@gmail.com, 123456789, Invalid data) -->
+                  <span class="method-name">testCase1</span>
+                  <span class="parameters">(vtherider63421@gmail.com, 123456789, Invalid data)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-BaseSuite-class-failed -->
+          </div> <!-- suite-BaseSuite-class-passed -->
         </div> <!-- panel BaseSuite -->
         <div panel-name="test-xml-BaseSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\vther\eclipse-workspace\Framework_Practice1\testng.xml</span>
+            <span class="header-content">C:\Users\vther\eclipse-workspace\Framework_Practice1\testSuite\testng.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -154,7 +189,7 @@
   &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;BasicTest&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;codeCheck.BaseClassCode&quot;/&gt;
+      &lt;class name=&quot;codeCheck.LoginTestCases&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- BasicTest --&gt;
 &lt;/suite&gt; &lt;!-- BaseSuite --&gt;
@@ -194,16 +229,28 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testTwo')
-data.setCell(0, 2, 'codeCheck.BaseClassCode')
-data.setCell(0, 3, 35510);
+data.setCell(0, 1, 'testCase1')
+data.setCell(0, 2, 'codeCheck.LoginTestCases')
+data.setCell(0, 3, 2816);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testCase1')
+data.setCell(1, 2, 'codeCheck.LoginTestCases')
+data.setCell(1, 3, 2812);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testCase1')
+data.setCell(2, 2, 'codeCheck.LoginTestCases')
+data.setCell(2, 3, 2787);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testCase1')
+data.setCell(3, 2, 'codeCheck.LoginTestCases')
+data.setCell(3, 3, 2644);
 window.suiteTableData['BaseSuite']= { tableData: data, tableDiv: 'times-div-BaseSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 35 seconds</span>
+              <span class="suite-total-time">Total running time: 11 seconds</span>
               <div id="times-div-BaseSuite">
               </div> <!-- times-div-BaseSuite -->
             </div> <!-- times-div -->
@@ -222,9 +269,9 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">codeCheck.BaseClassCode</span>
+              <span class="ignored-class-name">codeCheck.LoginTestCases</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">testOne</span>
+                <span class="ignored-method-name">loginTest</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -236,16 +283,26 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">codeCheck.BaseClassCode</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">codeCheck.LoginTestCases</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">basicMethod</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">testTwo</span>
-                <span class="method-start">72039 ms</span>
+                <span class="method-name">testCase1(vtherider6342@gmail.com, 12345678, Valid)</span>
+                <span class="method-start">9072 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCase1(vtherider63421@gmail.com, 12345678, Invalid username)</span>
+                <span class="method-start">11877 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCase1(vtherider6342@gmail.com, 123456789, Invalid Password)</span>
+                <span class="method-start">14693 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testCase1(vtherider63421@gmail.com, 123456789, Invalid data)</span>
+                <span class="method-start">17513 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
